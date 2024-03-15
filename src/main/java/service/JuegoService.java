@@ -24,7 +24,7 @@ import service.exceptions.NonexistentEntityException;
 public class JuegoService implements Serializable {
 
     public JuegoService() {
-        this.emf = Persistence.createEntityManagerFactory("semana08PU");
+       this.emf = Persistence.createEntityManagerFactory("PU_LEVA");
     }
     private EntityManagerFactory emf = null;
 
