@@ -1,10 +1,12 @@
-models/Juego.class
 models/Juego_.class
-helpers/Constantes.class
 models/Categoria_.class
-service/exceptions/NonexistentEntityException.class
 service/CategoriaService.class
-service/JuegoService.class
 models/Categoria.class
-service/exceptions/IllegalOrphanException.class
+controllers/CategoriaController.class
 service/exceptions/PreexistingEntityException.class
+models/Juego.class
+helpers/Constantes.class
+service/exceptions/NonexistentEntityException.class
+helpers/General.class
+service/JuegoService.class
+service/exceptions/IllegalOrphanException.class

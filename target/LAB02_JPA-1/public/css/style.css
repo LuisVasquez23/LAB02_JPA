@@ -86,3 +86,9 @@
 table.dataTable{
    box-shadow: 2px 2px 10px #B4B4B8;
 }
+
+
+td {
+    text-align: center; /* Centra horizontalmente */
+    vertical-align: middle; /* Centra verticalmente */
+}

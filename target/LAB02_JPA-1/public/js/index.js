@@ -1,1 +1,1 @@
-initDataTable("table");
+initDataTable("table" , { columnDefs: [ { width: 'auto' , target: 0 } ] });
