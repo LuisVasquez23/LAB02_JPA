@@ -1,0 +1,10 @@
+models/Juego.class
+models/Juego_.class
+helpers/Constantes.class
+models/Categoria_.class
+service/exceptions/NonexistentEntityException.class
+service/CategoriaService.class
+service/JuegoService.class
+models/Categoria.class
+service/exceptions/IllegalOrphanException.class
+service/exceptions/PreexistingEntityException.class

@@ -26,7 +26,7 @@ import service.exceptions.NonexistentEntityException;
 public class CategoriaService implements Serializable {
 
     public CategoriaService() {
-        this.emf = Persistence.createEntityManagerFactory("PU_LEVA");
+        this.emf = Persistence.createEntityManagerFactory("LAB02_JPA_P_UNIT");
     }
     
     private EntityManagerFactory emf = null;
