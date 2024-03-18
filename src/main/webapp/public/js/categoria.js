@@ -13,8 +13,6 @@ const GetCategorias = ()=>{
 
 const RenderTableData = (categorias)=>{
     
-    console.log(categorias)
-    
     $("#table").DataTable().clear().draw();
 
     categorias.forEach( (categoria) =>{
@@ -22,7 +20,7 @@ const RenderTableData = (categorias)=>{
         .row.add([
             `<input type="checkbox" name="item-${categoria.idCategoria}" value="${categoria.idCategoria}" />`,
             categoria.categoria,
-            categoria.categoria,
+            categoria.imagenCat,
              `
                 <div class="btn-group text-center">
                     <button class="btn btn-primary" onclick="UpdateCliente(${categoria.idCategoria})">Actualizar</button>
