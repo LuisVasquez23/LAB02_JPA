@@ -26,6 +26,7 @@
                 </table>
             </div>
             
+            <button class="btn btn-danger" onclick="DeleteCategories()">Eliminar seleccionados</button>
             
             
         </div>

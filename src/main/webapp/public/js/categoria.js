@@ -56,8 +56,6 @@ const DeleteCategory = (idCategory) => {
             .then(response => response.json())
             .then( data =>{
         
-                console.log(data.length);
-        
                 if(data.length != 0){
                  Swal.fire(
                     '¡Eliminado!',
@@ -83,4 +81,72 @@ const DeleteCategory = (idCategory) => {
        }
     });
     
+}
+
+const DeleteCategories = () => {
+    
+    const selectedIds = GetSelectedCheckboxes();
+    if (selectedIds.length === 0) {
+            Swal.fire(
+                'Cuidado!',
+                'Tienes que seleccionar un registro',
+                'warning'
+            );
+        return;
+    }
+    
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Una vez eliminados, no podrás recuperar estos registros.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlos!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Promise.all(selectedIds.map(id => {
+                return fetch(BASE_URL + `Categoria?id=${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.json());
+            }))
+            .then(results => {
+                const success = results.every(data => data.length !== 0);
+                if (success) {
+                    Swal.fire(
+                        '¡Eliminados!',
+                        'Los registros han sido eliminados.',
+                        'success'
+                    );
+                } else {
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: '¡Algunos registros no pudieron ser eliminados!',
+                        icon: 'error',
+                        confirmButtonText: 'Cerrar'
+                    });
+                }
+            })
+            .then(function(){
+                GetCategorias();
+            })
+            .catch(error => {
+                console.error('Error al realizar la solicitud:', error); // Manejar errores
+            });
+        }
+    });
+    
+}
+
+
+const GetSelectedCheckboxes = () => {
+    const selectedCheckboxes = [];
+    $('#table input[type="checkbox"]:checked').each(function() {
+        selectedCheckboxes.push($(this).val());
+    });
+    return selectedCheckboxes;
 }
