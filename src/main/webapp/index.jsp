@@ -20,18 +20,7 @@
                  </tr>
                </thead>
                <tbody>
-                 <tr>
-                   <td>Columna 1</td>
-                   <td>Columna 2</td>
-                   <td>Columna 3</td>
-                   <td>Columna 3</td>
-                 </tr>
-                 <tr>
-                   <td>Columna 5</td>
-                   <td>Columna 4</td>
-                   <td>Columna 6</td>
-                   <td>Columna 3</td>
-                 </tr>
+                
                </tbody>
              </table>
             

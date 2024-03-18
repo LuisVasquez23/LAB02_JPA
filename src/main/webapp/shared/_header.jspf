@@ -38,10 +38,10 @@
         <nav class="navbar">
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="" class="active">Categorias</a>
+                    <a href="<%= Constantes.URL %>views/categorias/index.jsp" class="active">Categorias</a>
                 </li>
                 <li class="menu-item">
-                    <a href="">Juegos</a>
+                    <a href="<%= Constantes.URL %>views/juegos/index.jsp">Juegos</a>
                 </li>
             </ul>
         </nav>
