@@ -34,6 +34,8 @@
       referrerpolicy="no-referrer"
     ></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.6/sweetalert2.all.js" integrity="sha512-s6cmjAyURwCTwLDdp0oIw8QcQ7zdYioOWOoYACB7+Xmzrnc9VH1A8aUei32LafOWRiPiYJKSWSNoNg2WG5SBRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <script src="<%= Constantes.URL %>public/js/initDatatable.js" type="text/javascript"></script>
     <script src="<%= Constantes.URL %>public/js/index.js" type="text/javascript"></script>
 

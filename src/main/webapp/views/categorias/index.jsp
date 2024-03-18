@@ -10,19 +10,21 @@
               Agregar categoria
             </button>
    
-            <table class="table table-striped table-bordered" id="table">
-               <thead>
-                 <tr>
-                   <th></th>
-                   <th>Categoria</th>
-                   <th>Imagen</th>
-                   <th>Acción</th>
-                 </tr>
-               </thead>
-               <tbody>
-                
-               </tbody>
-             </table>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Categoria</th>
+                        <th>Imagen</th>
+                        <th>Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
             
             
             

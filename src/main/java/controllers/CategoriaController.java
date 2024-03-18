@@ -36,5 +36,24 @@ public class CategoriaController extends HttpServlet {
         
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try{
+            int id = Integer.parseInt(request.getParameter("id"));
+        
+
+            _service.destroy(id);
+            
+            General.sendAsJson(response, "[{\"id\": " + id + "}]");
+            return;
+
+        }catch(Exception e){
+            General.sendAsJson(response, "[]");
+            return;
+        }
+    }
+    
+    
+
 
 }
