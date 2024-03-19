@@ -28,14 +28,13 @@
             
             <button class="btn btn-danger" onclick="DeleteCategories()">Eliminar seleccionados</button>
             
-            
         </div>
       </div>
 
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -43,7 +42,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form method="post" action="" enctype="multipart/form-data" class="row">
+              <form action="/LAB02_JPA/Categoria" method="POST" enctype="multipart/form-data" class="row" id="categoriaForm">
                   
                   <!-- NOMBRE CATEGORIA -->
                   <div class="col-md-12 mb-2">
@@ -59,8 +58,9 @@
                   
                   <!-- SUBMIT BTN -->
                   <div class="col-md-12 mb-2">
-                      <input type="submit" name="btnAdd" class="btn btn-primary w-100" value="Agregar" >
+                      <input type="button" name="btnAdd" id="btnAdd" class="btn btn-primary w-100" value="Agregar" >
                   </div>
+                  
               </form>
           </div>
           <div class="modal-footer">

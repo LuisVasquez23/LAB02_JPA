@@ -1,8 +1,38 @@
 const BASE_URL = "/LAB02_JPA/";
+const POST_URL = BASE_URL+"Categoria";
+const btnAdd = document.getElementById("btnAdd");
 
 document.addEventListener("DOMContentLoaded" , ()=>{
     GetCategorias();
 })
+
+btnAdd.addEventListener("click" , ()=>{
+    let formData = new FormData(document.getElementById("categoriaForm"));
+    
+    // Enviar los datos del formulario al servidor usando Fetch
+    fetch(POST_URL, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        
+        if (!response.ok) {
+            throw new Error("Error al enviar la solicitud.");
+            hideModal('#exampleModal');
+        }
+        
+        showAlert("Agregado" , "Agregado correctamente" , "success");
+        
+        GetCategorias();
+        
+        hideModal('#exampleModal');
+    })
+    .catch(error => {
+        console.error(error);
+        hideModal('#exampleModal');
+    });
+    
+});
 
 
 const GetCategorias = ()=>{
@@ -142,11 +172,18 @@ const DeleteCategories = () => {
     
 }
 
-
 const GetSelectedCheckboxes = () => {
     const selectedCheckboxes = [];
     $('#table input[type="checkbox"]:checked').each(function() {
         selectedCheckboxes.push($(this).val());
     });
     return selectedCheckboxes;
+}
+
+function hideModal(modalId) {
+  $(modalId).removeClass("in");
+  $(".modal-backdrop").remove();
+  $('body').removeClass('modal-open');
+  $('body').css('padding-right', '');
+  $(modalId).hide();
 }
