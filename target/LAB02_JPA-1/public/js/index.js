@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded" , ()=>{
     setTimeout(()=>{
         ShowHideLoader();
-    } , 1500);
+    } , 2000);
 })
 
 initDataTable("table" , { columnDefs: [ { width: 'auto' , target: 0 } ] });
