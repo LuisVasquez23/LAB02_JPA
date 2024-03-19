@@ -1,7 +1,9 @@
 const BASE_URL = "/LAB02_JPA/";
 const POST_URL = BASE_URL+"Categoria";
 const btnAdd = document.getElementById("btnAdd");
+const btnUpdate = document.getElementById("btnUpdate");
 const addModalBtn = document.getElementById("addModalBtn");
+
 
 
 document.addEventListener("DOMContentLoaded" , ()=>{
@@ -38,18 +40,21 @@ btnAdd.addEventListener("click" , ()=>{
     
 });
 
+btnUpdate.addEventListener("click" , ()=>{
+   console.log("dio click"); 
+});
+
 addModalBtn.addEventListener("click" , ()=>{
     $("#addModal").modal('show');
-})
+});
 
 const GetCategorias = ()=>{
     fetch("/LAB02_JPA/Categoria")
     .then(response => response.json())
     .then((categorias)=>{
-        console.log(categorias)
         RenderTableData(categorias);
-    })
-}
+    });
+};
 
 const RenderTableData = (categorias)=>{
     
@@ -70,7 +75,7 @@ const RenderTableData = (categorias)=>{
         ]).draw();
     });
     
-}
+};
 
 const DeleteCategory = (idCategory) => {
     
@@ -200,5 +205,11 @@ const cleanInputs = () => {
 }
 
 const UpdateCategory = (idCategory , nameCategory , imagenName) =>{
-    $("#btnUpdate").modal('show');
-}
+    
+    // Asignar valores
+    $("#idCategoriaUpdate").val(idCategory);
+    $("#categoriaUpdate").val(nameCategory);
+    $("#imagenCategoriaUpdate").val(imagenName);
+    
+    $("#updateModal").modal('show');
+};

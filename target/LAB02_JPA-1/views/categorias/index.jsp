@@ -81,6 +81,16 @@
           <div class="modal-body">
               <form action="/LAB02_JPA/Categoria" method="POST" enctype="multipart/form-data" class="row" id="categoriaFormUpdate">
                   
+                  <!-- ID CATEGORIA -->
+                  <div class="col-md-12 mb-2">
+                      <input type="hidden" name="idCategoriaUpdate" id="idCategoriaUpdate" class="form-control" >
+                  </div>
+                  
+                  <!-- IMAGEN CATEGORIA -->
+                  <div class="col-md-12 mb-2">
+                      <input type="hidden" name="imagenCategoriaUpdate" id="imagenCategoriaUpdate" class="form-control" >
+                  </div>
+                  
                   <!-- NOMBRE CATEGORIA -->
                   <div class="col-md-12 mb-2">
                       <label for="categoriaUpdate">Categoria: </label>
