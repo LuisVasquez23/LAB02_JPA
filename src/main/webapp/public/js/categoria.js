@@ -60,7 +60,7 @@ const RenderTableData = (categorias)=>{
         .row.add([
             `<input type="checkbox" name="item-${categoria.idCategoria}" value="${categoria.idCategoria}" />`,
             categoria.categoria,
-            categoria.imagenCat,
+            `<img src="${BASE_URL}/imagenes/${categoria.imagenCat}" title="${categoria.categoria}" style="width:100px" />`,
              `
                 <div class="btn-group text-center">
                     <button class="btn btn-primary" onclick="UpdateCliente(${categoria.idCategoria})">Actualizar</button>
