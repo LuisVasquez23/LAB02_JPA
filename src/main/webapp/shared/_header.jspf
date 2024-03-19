@@ -39,6 +39,28 @@
     
     </head>
     <body>
+        
+        <div class="loader-container" id="loader-container">
+            <div class="loader">
+                <div class="circle">
+                  <div class="dot"></div>
+                  <div class="outline"></div>
+                </div>
+                <div class="circle">
+                  <div class="dot"></div>
+                  <div class="outline"></div>
+                </div>
+                <div class="circle">
+                  <div class="dot"></div>
+                  <div class="outline"></div>
+                </div>
+                <div class="circle">
+                  <div class="dot"></div>
+                  <div class="outline"></div>
+                </div>
+            </div>
+        </div>
+        
         <nav class="navbar">
             <ul class="menu">
                 <li class="menu-item">

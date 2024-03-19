@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded" , ()=>{
 })
 
 btnAdd.addEventListener("click" , ()=>{
+    
+    setTimeout(()=>{
+        ShowHideLoader();
+    } , 1500);
+
+    
     let formData = new FormData(document.getElementById("categoriaForm"));
     
     // Enviar los datos del formulario al servidor usando Fetch
@@ -19,6 +25,7 @@ btnAdd.addEventListener("click" , ()=>{
     })
     .then(response => {
 
+        
         if (!response.ok) {
             throw new Error("Error al enviar la solicitud.");
              hideModal('#addModal');
@@ -31,6 +38,11 @@ btnAdd.addEventListener("click" , ()=>{
         hideModal('#addModal');
         
         cleanInputs();
+        
+        setTimeout(()=>{
+            ShowHideLoader();
+        } , 1500);
+        
     })
     .catch(error => {
         console.error(error);
@@ -41,7 +53,10 @@ btnAdd.addEventListener("click" , ()=>{
 
 btnUpdate.addEventListener("click" , ()=>{
    
-
+   setTimeout(()=>{
+        ShowHideLoader();
+    } , 1500);
+   
     let formData = new FormData(document.getElementById("categoriaFormUpdate"));
     
    
@@ -70,10 +85,18 @@ btnUpdate.addEventListener("click" , ()=>{
         hideModal('#updateModal');
         
         cleanInputs();
+        
+        setTimeout(()=>{
+            ShowHideLoader();
+        } , 1500);
+        
     })
     .catch(error => {
         console.error(error);
         hideModal('#updateModal');
+        setTimeout(()=>{
+            ShowHideLoader();
+        } , 1500);
     });
    
 });
@@ -113,6 +136,10 @@ const RenderTableData = (categorias)=>{
 
 const DeleteCategory = (idCategory) => {
     
+    setTimeout(()=>{
+        ShowHideLoader();
+    } , 1500);
+    
    Swal.fire({
       title: "¿Estás seguro?",
       text: "Una vez eliminado, no podrás recuperar este registro.",
@@ -151,6 +178,10 @@ const DeleteCategory = (idCategory) => {
             })
             .then(function(){
                 GetCategorias();
+        
+                setTimeout(()=>{
+                    ShowHideLoader();
+                } , 1500);
             })
             .catch(error => {
                 console.error('Error al realizar la solicitud:', error); // Manejar errores

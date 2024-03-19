@@ -1,5 +1,11 @@
 
 
+document.addEventListener("DOMContentLoaded" , ()=>{
+    setTimeout(()=>{
+        ShowHideLoader();
+    } , 1500);
+})
+
 initDataTable("table" , { columnDefs: [ { width: 'auto' , target: 0 } ] });
 
 function showAlert(message,title, type) {
@@ -12,3 +18,4 @@ function showAlert(message,title, type) {
         confirmButtonText: 'OK'
     });
 }
+
