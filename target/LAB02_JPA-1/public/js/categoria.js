@@ -46,6 +46,7 @@ const GetCategorias = ()=>{
     fetch("/LAB02_JPA/Categoria")
     .then(response => response.json())
     .then((categorias)=>{
+        console.log(categorias)
         RenderTableData(categorias);
     })
 }

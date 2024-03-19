@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
 public class General {
+    
     public static <T> String ObjectToJson(List<T> dataList){
         Jsonb jsonb = JsonbBuilder.create();
         String jsonString = jsonb.toJson(dataList);
