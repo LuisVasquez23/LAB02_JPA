@@ -44,6 +44,11 @@
           <div class="modal-body">
               <form action="/LAB02_JPA/Categoria" method="POST" enctype="multipart/form-data" class="row" id="categoriaForm">
                   
+                   <!-- Accion -->
+                  <div class="col-md-12 mb-2">
+                      <input type="hidden" name="action" id="actionInsert" value="create" class="form-control" >
+                  </div>
+                  
                   <!-- NOMBRE CATEGORIA -->
                   <div class="col-md-12 mb-2">
                       <label for="categoria">Categoria: </label>
@@ -81,6 +86,11 @@
           <div class="modal-body">
               <form action="/LAB02_JPA/Categoria" method="POST" enctype="multipart/form-data" class="row" id="categoriaFormUpdate">
                   
+                  <!-- Accion -->
+                  <div class="col-md-12 mb-2">
+                      <input type="hidden" name="action" id="actionUpdate" value="update" class="form-control" >
+                  </div>
+                  
                   <!-- ID CATEGORIA -->
                   <div class="col-md-12 mb-2">
                       <input type="hidden" name="idCategoriaUpdate" id="idCategoriaUpdate" class="form-control" >
@@ -88,19 +98,19 @@
                   
                   <!-- IMAGEN CATEGORIA -->
                   <div class="col-md-12 mb-2">
-                      <input type="hidden" name="imagenCategoriaUpdate" id="imagenCategoriaUpdate" class="form-control" >
+                      <input type="hidden" name="pic_categoria_old" id="imagenCategoriaUpdate" class="form-control" >
                   </div>
                   
                   <!-- NOMBRE CATEGORIA -->
                   <div class="col-md-12 mb-2">
                       <label for="categoriaUpdate">Categoria: </label>
-                      <input type="text" name="categoriaUpdate" id="categoriaUpdate" class="form-control" placeholder="categoria" required="true">
+                      <input type="text" name="categoria" id="categoriaUpdate" class="form-control" placeholder="categoria" required="true">
                   </div>
                   
                   <!-- FOTO CATEGORIA -->
                   <div class="col-md-12 mb-2">
                       <label for="pic_categoriaUpdate">Imagen: </label>
-                      <input type="file" name="pic_categoriaUpdate" id="pic_categoriaUpdate" class="form-control" placeholder="pic_categoria" required="true">
+                      <input type="file" name="pic_categoria" id="pic_categoria" class="form-control" placeholder="pic_categoria">
                   </div>
                   
                   <!-- SUBMIT BTN -->

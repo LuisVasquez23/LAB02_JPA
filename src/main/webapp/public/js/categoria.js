@@ -1,10 +1,9 @@
 const BASE_URL = "/LAB02_JPA/";
 const POST_URL = BASE_URL+"Categoria";
+const UPDATE_URL = BASE_URL+"Categoria";
 const btnAdd = document.getElementById("btnAdd");
 const btnUpdate = document.getElementById("btnUpdate");
 const addModalBtn = document.getElementById("addModalBtn");
-
-
 
 document.addEventListener("DOMContentLoaded" , ()=>{
     GetCategorias();
@@ -19,29 +18,64 @@ btnAdd.addEventListener("click" , ()=>{
         body: formData
     })
     .then(response => {
-        
+
         if (!response.ok) {
             throw new Error("Error al enviar la solicitud.");
-            hideModal('#exampleModal');
+             hideModal('#addModal');
         }
         
         showAlert("Agregado" , "Agregado correctamente" , "success");
         
         GetCategorias();
         
-        hideModal('#exampleModal');
+        hideModal('#addModal');
         
         cleanInputs();
     })
     .catch(error => {
         console.error(error);
-        hideModal('#exampleModal');
+         hideModal('#addModal');
     });
     
 });
 
 btnUpdate.addEventListener("click" , ()=>{
-   console.log("dio click"); 
+   
+
+    let formData = new FormData(document.getElementById("categoriaFormUpdate"));
+    
+   
+    fetch(UPDATE_URL, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+
+
+        if (!response.ok) {
+            throw new Error("Error al enviar la solicitud.");
+            hideModal('#updateModal');
+        }
+        
+        return response.json();
+    })
+    .then(data => {
+        
+        console.log(data);
+
+        showAlert("Actualizado" , "Actualizado correctamente" , "success");
+        
+        GetCategorias();
+        
+        hideModal('#updateModal');
+        
+        cleanInputs();
+    })
+    .catch(error => {
+        console.error(error);
+        hideModal('#updateModal');
+    });
+   
 });
 
 addModalBtn.addEventListener("click" , ()=>{
@@ -65,7 +99,7 @@ const RenderTableData = (categorias)=>{
         .row.add([
             `<input type="checkbox" name="item-${categoria.idCategoria}" value="${categoria.idCategoria}" />`,
             categoria.categoria,
-            `<img src="${BASE_URL}/imagenes/${categoria.imagenCat}" title="${categoria.categoria}" style="width:100px" />`,
+            `<img src="${BASE_URL}/imagenes/${categoria.imagenCat}" title="${categoria.categoria}" style="width:50px" />`,
              `
                 <div class="btn-group text-center">
                     <button class="btn btn-primary" onclick="UpdateCategory(${categoria.idCategoria} , '${categoria.categoria}' , '${categoria.imagenCat}')">Actualizar</button>
@@ -193,8 +227,8 @@ const GetSelectedCheckboxes = () => {
     return selectedCheckboxes;
 }
 
-function hideModal() {
-  $("#addModal").modal('hide');
+function hideModal(idModal) {
+  $(idModal).modal('hide');
 }
 
 const cleanInputs = () => {
