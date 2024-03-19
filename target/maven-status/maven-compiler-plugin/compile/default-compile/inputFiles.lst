@@ -1,11 +1,11 @@
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\controllers\JuegoController.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\service\exceptions\IllegalOrphanException.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\service\CategoriaService.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\service\exceptions\PreexistingEntityException.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\service\exceptions\NonexistentEntityException.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\helpers\General.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\models\Categoria.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\models\Juego.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\helpers\Constantes.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\controllers\CategoriaController.java
-C:\Users\luis\Desktop\proyectos\LAB02_JPA\src\main\java\service\JuegoService.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/controllers/JuegoController.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/service/exceptions/PreexistingEntityException.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/models/Juego.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/service/CategoriaService.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/service/exceptions/IllegalOrphanException.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/service/JuegoService.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/controllers/CategoriaController.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/helpers/General.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/models/Categoria.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/helpers/Constantes.java
+/Users/luisvasquez/Desktop/UNICAES/aplicacion de frameworks empresariales/periodo2/LAB02_JPA/src/main/java/service/exceptions/NonexistentEntityException.java

@@ -30,7 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Juego.findByPrecio", query = "SELECT j FROM Juego j WHERE j.precio = :precio"),
     @NamedQuery(name = "Juego.findByExistencias", query = "SELECT j FROM Juego j WHERE j.existencias = :existencias"),
     @NamedQuery(name = "Juego.findByImagen", query = "SELECT j FROM Juego j WHERE j.imagen = :imagen"),
-    @NamedQuery(name = "Juego.findByClaficacion", query = "SELECT j FROM Juego j WHERE j.claficacion = :claficacion")})
+    @NamedQuery(name = "Juego.findByClasificacion", query = "SELECT j FROM Juego j WHERE j.clasificacion = :clasificacion")})
 public class Juego implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +52,7 @@ public class Juego implements Serializable {
     private String imagen;
     @Basic(optional = false)
     @Column(nullable = false, length = 20)
-    private String claficacion;
+    private String clasificacion;
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria", nullable = false)
     @ManyToOne(optional = false)
     private Categoria idCategoria;
@@ -64,12 +64,12 @@ public class Juego implements Serializable {
         this.idJuego = idJuego;
     }
 
-    public Juego(Integer idJuego, String nomJuego, float precio, int existencias, String claficacion) {
+    public Juego(Integer idJuego, String nomJuego, float precio, int existencias, String clasificacion) {
         this.idJuego = idJuego;
         this.nomJuego = nomJuego;
         this.precio = precio;
         this.existencias = existencias;
-        this.claficacion = claficacion;
+        this.clasificacion = clasificacion;
     }
 
     public Integer getIdJuego() {
@@ -112,12 +112,12 @@ public class Juego implements Serializable {
         this.imagen = imagen;
     }
 
-    public String getClaficacion() {
-        return claficacion;
+    public String getClasificacion() {
+        return clasificacion;
     }
 
-    public void setClaficacion(String claficacion) {
-        this.claficacion = claficacion;
+    public void setClasificacion(String clasificacion) {
+        this.clasificacion = clasificacion;
     }
 
     public Categoria getIdCategoria() {

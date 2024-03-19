@@ -5,7 +5,6 @@
 package models;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
@@ -46,7 +45,7 @@ public class Categoria implements Serializable {
     private String imagenCat;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria")
     @JsonbTransient
-    private LinkedList<Juego> juegoList;
+    private List<Juego> juegoList;
 
     public Categoria() {
     }
@@ -84,11 +83,11 @@ public class Categoria implements Serializable {
         this.imagenCat = imagenCat;
     }
 
-    public LinkedList<Juego> getJuegoList() {
+    public List<Juego> getJuegoList() {
         return juegoList;
     }
 
-    public void setJuegoList(LinkedList<Juego> juegoList) {
+    public void setJuegoList(List<Juego> juegoList) {
         this.juegoList = juegoList;
     }
 

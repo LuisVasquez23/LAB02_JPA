@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import models.Juego;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,9 +26,8 @@ import service.exceptions.NonexistentEntityException;
 public class CategoriaService implements Serializable {
 
     public CategoriaService() {
-        this.emf = Persistence.createEntityManagerFactory("LAB02_JPA_P_UNIT");
+         this.emf = Persistence.createEntityManagerFactory("LAB02_JPA_P_UNIT");
     }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -38,13 +36,13 @@ public class CategoriaService implements Serializable {
 
     public void create(Categoria categoria) {
         if (categoria.getJuegoList() == null) {
-            categoria.setJuegoList(new LinkedList<Juego>());
+            categoria.setJuegoList(new ArrayList<Juego>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            LinkedList<Juego> attachedJuegoList = new LinkedList<Juego>();
+            List<Juego> attachedJuegoList = new ArrayList<Juego>();
             for (Juego juegoListJuegoToAttach : categoria.getJuegoList()) {
                 juegoListJuegoToAttach = em.getReference(juegoListJuegoToAttach.getClass(), juegoListJuegoToAttach.getIdJuego());
                 attachedJuegoList.add(juegoListJuegoToAttach);
@@ -74,8 +72,8 @@ public class CategoriaService implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Categoria persistentCategoria = em.find(Categoria.class, categoria.getIdCategoria());
-            LinkedList<Juego> juegoListOld = persistentCategoria.getJuegoList();
-            LinkedList<Juego> juegoListNew = categoria.getJuegoList();
+            List<Juego> juegoListOld = persistentCategoria.getJuegoList();
+            List<Juego> juegoListNew = categoria.getJuegoList();
             List<String> illegalOrphanMessages = null;
             for (Juego juegoListOldJuego : juegoListOld) {
                 if (!juegoListNew.contains(juegoListOldJuego)) {
@@ -88,7 +86,7 @@ public class CategoriaService implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            LinkedList<Juego> attachedJuegoListNew = new LinkedList<Juego>();
+            List<Juego> attachedJuegoListNew = new ArrayList<Juego>();
             for (Juego juegoListNewJuegoToAttach : juegoListNew) {
                 juegoListNewJuegoToAttach = em.getReference(juegoListNewJuegoToAttach.getClass(), juegoListNewJuegoToAttach.getIdJuego());
                 attachedJuegoListNew.add(juegoListNewJuegoToAttach);
