@@ -70,7 +70,42 @@
       </div>
     </div>
     
-   
+    <!-- Update modal -->
+    <div class="modal fade" id="updateModal" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="updateModallabel">Actualizar categoria</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form action="/LAB02_JPA/Categoria" method="POST" enctype="multipart/form-data" class="row" id="categoriaFormUpdate">
+                  
+                  <!-- NOMBRE CATEGORIA -->
+                  <div class="col-md-12 mb-2">
+                      <label for="categoriaUpdate">Categoria: </label>
+                      <input type="text" name="categoriaUpdate" id="categoriaUpdate" class="form-control" placeholder="categoria" required="true">
+                  </div>
+                  
+                  <!-- FOTO CATEGORIA -->
+                  <div class="col-md-12 mb-2">
+                      <label for="pic_categoriaUpdate">Imagen: </label>
+                      <input type="file" name="pic_categoriaUpdate" id="pic_categoriaUpdate" class="form-control" placeholder="pic_categoria" required="true">
+                  </div>
+                  
+                  <!-- SUBMIT BTN -->
+                  <div class="col-md-12 mb-2">
+                      <input type="button" name="btnUpdate" id="btnUpdate" class="btn btn-primary w-100" value="Actualizar" >
+                  </div>
+                  
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
  
 <%@ include file="../../shared/_footer.jspf" %>
 

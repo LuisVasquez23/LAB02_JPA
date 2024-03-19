@@ -98,7 +98,18 @@ public class CategoriaController extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
             int id = Integer.parseInt(request.getParameter("id"));
-        
+
+            Categoria categoria = _service.findCategoria(id);
+            
+            String uploadedDirectory = getServletContext().getRealPath("/"); // Obtiene la ruta del contexto del proyecto
+            uploadedDirectory = uploadedDirectory + "imagenes";
+            String uploadedFilePath = uploadedDirectory + categoria.getImagenCat();
+            File uploadedFile = new File(uploadedFilePath);
+
+            // Si el archivo ya existe, eliminarlo
+            if (uploadedFile.exists()) {
+                uploadedFile.delete();
+            }
 
             _service.destroy(id);
             

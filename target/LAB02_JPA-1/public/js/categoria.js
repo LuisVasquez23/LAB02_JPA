@@ -63,7 +63,7 @@ const RenderTableData = (categorias)=>{
             `<img src="${BASE_URL}/imagenes/${categoria.imagenCat}" title="${categoria.categoria}" style="width:100px" />`,
              `
                 <div class="btn-group text-center">
-                    <button class="btn btn-primary" onclick="UpdateCliente(${categoria.idCategoria})">Actualizar</button>
+                    <button class="btn btn-primary" onclick="UpdateCategory(${categoria.idCategoria} , '${categoria.categoria}' , '${categoria.imagenCat}')">Actualizar</button>
                     <button class="btn btn-danger" onclick="DeleteCategory(${categoria.idCategoria})">Eliminar</button>
                 <div>
             `
@@ -188,7 +188,7 @@ const GetSelectedCheckboxes = () => {
     return selectedCheckboxes;
 }
 
-function hideModal(modalId) {
+function hideModal() {
   $("#addModal").modal('hide');
 }
 
@@ -197,4 +197,8 @@ const cleanInputs = () => {
     $("input[name='categoria']").val("");
     // Limpiar el campo de archivo de imagen
     $("input[name='pic_categoria']").val("");
+}
+
+const UpdateCategory = (idCategory , nameCategory , imagenName) =>{
+    $("#btnUpdate").modal('show');
 }
