@@ -1,6 +1,8 @@
 const BASE_URL = "/LAB02_JPA/";
 const POST_URL = BASE_URL+"Categoria";
 const btnAdd = document.getElementById("btnAdd");
+const addModalBtn = document.getElementById("addModalBtn");
+
 
 document.addEventListener("DOMContentLoaded" , ()=>{
     GetCategorias();
@@ -26,6 +28,8 @@ btnAdd.addEventListener("click" , ()=>{
         GetCategorias();
         
         hideModal('#exampleModal');
+        
+        cleanInputs();
     })
     .catch(error => {
         console.error(error);
@@ -34,6 +38,9 @@ btnAdd.addEventListener("click" , ()=>{
     
 });
 
+addModalBtn.addEventListener("click" , ()=>{
+    $("#addModal").modal('show');
+})
 
 const GetCategorias = ()=>{
     fetch("/LAB02_JPA/Categoria")
@@ -181,9 +188,12 @@ const GetSelectedCheckboxes = () => {
 }
 
 function hideModal(modalId) {
-  $(modalId).removeClass("in");
-  $(".modal-backdrop").remove();
-  $('body').removeClass('modal-open');
-  $('body').css('padding-right', '');
-  $(modalId).hide();
+  $("#addModal").modal('hide');
+}
+
+const cleanInputs = () => {
+    // Limpiar el campo de texto de categoría
+    $("input[name='categoria']").val("");
+    // Limpiar el campo de archivo de imagen
+    $("input[name='pic_categoria']").val("");
 }

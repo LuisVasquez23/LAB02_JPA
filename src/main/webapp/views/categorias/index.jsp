@@ -6,7 +6,7 @@
         <div class="card-body">
             
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-success mb-3" id="addModalBtn">
               Agregar categoria
             </button>
    
@@ -34,7 +34,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addModal" >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
