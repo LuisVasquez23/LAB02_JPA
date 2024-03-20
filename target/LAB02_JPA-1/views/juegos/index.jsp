@@ -6,7 +6,7 @@
         <div class="card-body">
             
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success mb-3" id="btnAdd">
+            <button type="button" class="btn btn-success mb-3" id="btnAddModal">
               Agregar juego
             </button>
    
@@ -87,12 +87,15 @@
                     
                     <!-- CLASIFICACION -->
                     <div class="col-md-12 mb-2">
-                        <label for="clasificacion">Categoria </label>
+                        <label for="clasificacion">Clasificacion </label>
                         <select id="clasificacion" name="clasificacion" class="form-control" style="width: 100%;height: 38px !important;">
                         </select>
                     </div>
                     
-                    
+                     <!-- SUBMIT BTN -->
+                    <div class="col-md-12 mb-2 mt-2">
+                        <input type="button" name="btnAdd" id="btnAdd" class="btn btn-primary w-100" value="Agregar" >
+                    </div>
                     
                     
               </form>

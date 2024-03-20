@@ -6,7 +6,7 @@
  * ===========================================================
  * */
 const BASE_URL = "/LAB02_JPA/";
-const DELETE_URL = BASE_URL+"Juego";
+const GAME_URL = BASE_URL+"Juego";
 const CATEGORIES_URL = BASE_URL+"Categoria";
 
 /**
@@ -14,7 +14,8 @@ const CATEGORIES_URL = BASE_URL+"Categoria";
  *  ELEMENTS DECLARATION 
  * ===========================================================
  * */
-const btnAdd = document.getElementById("btnAdd");
+const btnAddModal = document.getElementById("btnAddModal");
+const btnAdd = document.getElementById("btnAdd"); 
 const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
 
 
@@ -25,7 +26,7 @@ const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
  * */
 
 const GetJuegos = ()=>{
-    fetch("/LAB02_JPA/Juego")
+    fetch(GAME_URL)
     .then(response => response.json())
     .then((categorias)=>{
         RenderTableData(categorias);
@@ -96,7 +97,7 @@ const deleteGame = (gameId)=>{
     })
     .then((result)=>{
          if (result.isConfirmed) {
-            fetch(DELETE_URL + `?gameId=${gameId}` , {
+            fetch(GAME_URL + `?gameId=${gameId}` , {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json'
@@ -189,6 +190,7 @@ const getClasificacion = (value , parentModal = "#addModal") =>{
     $("#clasificacion").val(value).trigger('change');
     
 };
+
 /**
  * ===========================================================
  *  EVENTS HANDLING 
@@ -198,7 +200,7 @@ document.addEventListener("DOMContentLoaded" , ()=>{
     GetJuegos();
 });
 
-btnAdd.addEventListener("click" , ()=>{
+btnAddModal.addEventListener("click" , ()=>{
     getCategories();
     getClasificacion();
     showModal("#addModal");
@@ -206,4 +208,8 @@ btnAdd.addEventListener("click" , ()=>{
 
 deleteSelectedBtn.addEventListener("click" , ()=>{
     deleteSelectedGames();
+});
+
+btnAdd.addEventListener("click" , ()=>{
+   console.log("dio click"); 
 });
