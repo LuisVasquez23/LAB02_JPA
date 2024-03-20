@@ -47,6 +47,56 @@
           </div>
           <div class="modal-body">
               
+              <form action="/LAB02_JPA/Juego" method="POST" enctype="multipart/form-data" class="row" id="juegoAddForm">
+                    
+                    <!-- ACTION -->
+                    <div class="col-md-12 mb-2">
+                          <input type="hidden" name="action" id="actionInsert" value="create" class="form-control" >
+                    </div>
+
+                    <!-- NOMBRE INPUT -->
+                    <div class="col-md-12 mb-2">
+                        <label for="gameName">Nombre del juego: </label>
+                        <input type="text" name="gameName" id="gameName" class="form-control" placeholder="Nombre del juego" required="true">
+                    </div>
+                    
+                    <!-- PRECIO INPUT -->
+                    <div class="col-md-6 mb-2">
+                        <label for="gamePrice">Precio: </label>
+                        <input type="number" min="0" step="0.01" name="gamePrice" id="gamePrice" class="form-control" placeholder="Precio" required="true">
+                    </div>
+                    
+                    <!-- EXISTENCIAS -->
+                    <div class="col-md-6 mb-2">
+                        <label for="existencia">Existencia: </label>
+                        <input type="number" min="0" step="1" name="existencia" id="existencia" class="form-control" placeholder="Existencia" required="true">
+                    </div>
+                    
+                    <!-- GAME PICTURE -->
+                    <div class="col-md-12 mb-2">
+                        <label for="gamePicture">Imagen: </label>
+                        <input type="file" name="gamePicture" id="gamePicture" class="form-control" placeholder="Imagen" required="true">
+                    </div>
+                    
+                    <!-- CATEGORIES -->
+                    <div class="col-md-12 mb-2">
+                        <label for="gameCategory">Categoria </label>
+                        <select name="gameCategory" id="gameCategory" class="form-control" style="width: 100%;height: 38px !important;">
+                        </select>
+                    </div>
+                    
+                    <!-- CLASIFICACION -->
+                    <div class="col-md-12 mb-2">
+                        <label for="clasificacion">Categoria </label>
+                        <select id="clasificacion" name="clasificacion" class="form-control" style="width: 100%;height: 38px !important;">
+                        </select>
+                    </div>
+                    
+                    
+                    
+                    
+              </form>
+              
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

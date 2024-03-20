@@ -7,6 +7,7 @@
  * */
 const BASE_URL = "/LAB02_JPA/";
 const DELETE_URL = BASE_URL+"Juego";
+const CATEGORIES_URL = BASE_URL+"Categoria";
 
 /**
  * ===========================================================
@@ -131,6 +132,63 @@ const deleteGame = (gameId)=>{
     
 };
 
+const getCategories = (id , parentModal = "#addModal") =>{
+    
+    id = id ?? "";
+    
+     $.ajax({
+        url: CATEGORIES_URL,
+        dataType: 'json',
+        success: function(data) {
+            
+            // Formatea los datos en el formato requerido por select2
+            let formattedData = data.map(function(item) {
+                return {
+                    id: item.idCategoria,
+                    text: item.categoria
+                };
+            });
+            
+            formattedData.push({id: "" , text: "Seleccionar una categoria"});
+            
+            // Inicializa select2 y pasa los datos formateados
+            $("#gameCategory").select2({
+                dropdownParent: $(parentModal),
+                data: formattedData // Pasa los datos ya formateados
+            });
+
+            // Establece el valor predeterminado seleccionado
+            $("#gameCategory").val(id).trigger('change');
+
+        }
+    });
+};
+
+const getClasificacion = (value , parentModal = "#addModal") =>{
+    
+    value = value ?? "";
+    
+    let data = [
+        {id: "EC" , text: "EARLY CHILDHOOD"},
+        {id: "E"  , text: "EVERYONE"},
+        {id: "E10" , text: "EVERYONE 10+"},
+        {id: "T" , text: "TEEN"},
+        {id: "M" , text: "MATURE 17+"},
+        {id: "AO" , text: "ADULTS ONLY 18+"},
+        {id: "RP" , text: "RATING PENDING"},
+        {id: "" , text: "Seleccionar clasificacion"}
+    ];  
+    
+    // Inicializa select2 y pasa los datos formateados
+    $("#clasificacion").select2({
+        dropdownParent: $(parentModal),
+        data: data // Pasa los datos ya formateados
+    });
+
+    // Establece el valor predeterminado seleccionado
+    $("#clasificacion").val(value).trigger('change');
+    
+};
 /**
  * ===========================================================
  *  EVENTS HANDLING 
@@ -140,8 +198,9 @@ document.addEventListener("DOMContentLoaded" , ()=>{
     GetJuegos();
 });
 
-
 btnAdd.addEventListener("click" , ()=>{
+    getCategories();
+    getClasificacion();
     showModal("#addModal");
 });
 
