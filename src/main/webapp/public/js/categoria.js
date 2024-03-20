@@ -147,7 +147,7 @@ const DeleteCategory = (idCategory) => {
             
                 Swal.fire({
                     title: '¡Error!',
-                    text: '¡No se puede eliminar el cliente!',
+                    text: '¡No se puede eliminar el registro!',
                     icon: 'error',
                     confirmButtonText: 'Cerrar'
                 });
@@ -158,6 +158,8 @@ const DeleteCategory = (idCategory) => {
             .catch(error => {
                 console.error('Error al realizar la solicitud:', error); // Manejar errores
             });
+            
+            GetCategorias();
        }
     });
     

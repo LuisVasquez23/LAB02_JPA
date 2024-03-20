@@ -2,7 +2,7 @@
 
 /**
  * ===========================================================
- *  VARIABLES AND CONST DECLARATION 
+ *  VARIABLES AND CONST  
  * ===========================================================
  * */
 const BASE_URL = "/LAB02_JPA/";
@@ -11,7 +11,7 @@ const CATEGORIES_URL = BASE_URL+"Categoria";
 
 /**
  * ===========================================================
- *  ELEMENTS DECLARATION 
+ *  ELEMENTS  
  * ===========================================================
  * */
 const btnAddModal = document.getElementById("btnAddModal");
@@ -21,7 +21,7 @@ const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
 
 /**
  * ===========================================================
- *  FUNTIONS DECLARATIONS 
+ *  FUNTIONS  
  * ===========================================================
  * */
 
@@ -79,6 +79,50 @@ const deleteSelectedGames = () =>{
         return;
     }
     
+     Swal.fire({
+        title: "Estas seguro?",
+        text: "Una vez eliminados, no podras recuperar estos registros.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminarlos!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Promise.all(selectedIds.map(id => {
+                return fetch(GAME_URL + `?gameId=${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.json());
+            }))
+            .then(results => {
+                const success = results.every(data => data.length !== 0);
+                if (success) {
+                    Swal.fire(
+                        '¡Eliminados!',
+                        'Los registros han sido eliminados.',
+                        'success'
+                    );
+                } else {
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: '¡Algunos registros no pudieron ser eliminados!',
+                        icon: 'error',
+                        confirmButtonText: 'Cerrar'
+                    });
+                }
+            })
+            .then(function(){
+                GetJuegos()();
+            })
+            .catch(error => {
+                console.error('Error al realizar la solicitud:', error); // Manejar errores
+            });
+        }
+    });
     
     
 };

@@ -11,4 +11,3 @@ service\CategoriaService.class
 helpers\General.class
 helpers\Constantes.class
 models\Categoria.class
-.netbeans_automatic_build
