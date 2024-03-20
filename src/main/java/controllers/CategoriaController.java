@@ -34,8 +34,7 @@ public class CategoriaController extends HttpServlet {
         List<Categoria> categorias = _service.findCategoriaEntities();
         
         General.sendAsJson(response, General.ObjectToJson(categorias));
-        return;
-        
+
     }
 
     @Override

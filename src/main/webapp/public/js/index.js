@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded" , ()=>{
     } , 2000);
 })
 
-initDataTable("table" , { columnDefs: [ { width: 'auto' , target: 0 } ] });
+initDataTable("#table" , { columnDefs: [ { width: 'auto' , target: 0 } ] });
 
 function showAlert(message,title, type) {
     Swal.fire({
