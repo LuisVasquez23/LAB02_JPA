@@ -10,7 +10,7 @@
                     <th>Precio</th>
                     <th>Existencias</th>
                     <th>Imagen</th>
-                    <th>Calificación</th>
+                    <th>Clasificación</th>
                     <th>Categoria</th>
                   </tr>
                 </thead>

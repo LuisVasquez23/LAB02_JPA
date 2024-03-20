@@ -1,3 +1,4 @@
+controllers\ReporteController.class
 service\JuegoService.class
 models\Juego.class
 service\exceptions\PreexistingEntityException.class
