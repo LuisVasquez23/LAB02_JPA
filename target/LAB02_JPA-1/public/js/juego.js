@@ -17,7 +17,7 @@ const CATEGORIES_URL = BASE_URL+"Categoria";
 const btnAddModal = document.getElementById("btnAddModal");
 const btnAdd = document.getElementById("btnAdd"); 
 const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
-
+const btnUpdate = document.getElementById("btnUpdate");
 
 /**
  * ===========================================================
@@ -49,7 +49,7 @@ const RenderTableData = (juegos)=>{
             juego.idCategoria.categoria,
              `
                 <div class="btn-group text-center">
-                    <button class="btn btn-primary" onclick="showUpdateModal()">Actualizar</button>
+                    <button class="btn btn-primary" onclick="showUpdateModal(${juego.idJuego}, '${juego.imagen}' , '${juego.nomJuego}' , ${juego.precio} , ${juego.existencias} , ${juego.idCategoria.idCategoria} , '${juego.clasificacion}')">Actualizar</button>
                     <button class="btn btn-danger" onclick="deleteGame(${juego.idJuego})">Eliminar</button>
                 <div>
             `
@@ -58,9 +58,20 @@ const RenderTableData = (juegos)=>{
     
 };
 
-const showUpdateModal = () =>{
+const showUpdateModal = (gameId , imgOld , gameName , gamePrice , gameExistencias , gameCategory , clasificacion) =>{
+    
+ 
+    $("#gameId").val(gameId);
+    $("#imgOld").val(imgOld);
+    $("#gameNameUpdate").val(gameName);
+    $("#gamePriceUpdate").val(gamePrice);
+    $("#existenciaUpdate").val(gameExistencias);
+    
+    getCategories(gameCategory ,"#gameCategoryUpdate","#updateModal");
+    getClasificacion(clasificacion,"#clasificacionUpdate","#updateModal");
+    
     showModal("#updateModal");
-}
+};
 
 const GetSelectedCheckboxes = () => {
     const selectedCheckboxes = [];
@@ -177,8 +188,8 @@ const deleteGame = (gameId)=>{
     
 };
 
-const getCategories = (id , parentModal = "#addModal") =>{
-    
+const getCategories = (id ,selectNode = "#gameCategory", parentModal = "#addModal") =>{
+
     id = id ?? "";
     
      $.ajax({
@@ -197,19 +208,19 @@ const getCategories = (id , parentModal = "#addModal") =>{
             formattedData.push({id: "" , text: "Seleccionar una categoria"});
             
             // Inicializa select2 y pasa los datos formateados
-            $("#gameCategory").select2({
+            $(selectNode).select2({
                 dropdownParent: $(parentModal),
                 data: formattedData // Pasa los datos ya formateados
             });
 
             // Establece el valor predeterminado seleccionado
-            $("#gameCategory").val(id).trigger('change');
+            $(selectNode).val(id).trigger('change');
 
         }
     });
 };
 
-const getClasificacion = (value , parentModal = "#addModal") =>{
+const getClasificacion = (value ,selectNode = "#clasificacion", parentModal = "#addModal") =>{
     
     value = value ?? "";
     
@@ -225,16 +236,78 @@ const getClasificacion = (value , parentModal = "#addModal") =>{
     ];  
     
     // Inicializa select2 y pasa los datos formateados
-    $("#clasificacion").select2({
+    $(selectNode).select2({
         dropdownParent: $(parentModal),
         data: data // Pasa los datos ya formateados
     });
 
     // Establece el valor predeterminado seleccionado
-    $("#clasificacion").val(value).trigger('change');
+    $(selectNode).val(value).trigger('change');
     
 };
 
+const updateGame = ()=>{
+    
+    let formData = new FormData(document.getElementById("juegoUpdateForm"));
+    
+    fetch(GAME_URL, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+
+
+        if (!response.ok) {
+            throw new Error("Error al enviar la solicitud.");
+            hideModal('#updateModal');
+        }
+        
+        return response.json();
+    })
+    .then(data => {
+        
+        console.log(data);
+        
+        showAlert("Actualizado" , "Actualizado correctamente" , "success");
+        
+        GetJuegos();
+        
+        hideModal('#updateModal');
+        
+        cleanUpdateInputs();
+
+    })
+    .catch(error => {
+        console.error(error);
+        hideModal('#updateModal');
+
+    });
+   
+};
+
+const cleanUpdateInputs = () => {
+   
+    $("#gameId").val("");
+    $("#imgOld").val("");
+    $("#gameNameUpdate").val("");
+    $("#gamePriceUpdate").val("");
+    $("#existenciaUpdate").val("");
+    
+    getCategories("" ,"#gameCategoryUpdate","#updateModal");
+    getClasificacion("","#clasificacionUpdate","#updateModal");
+    
+};
+
+const cleanCreateInputs = () => {
+   
+    $("#gameName").val("");
+    $("#gamePrice").val("");
+    $("#existencia").val("");
+    $("#gamePicture").val("");
+    getCategories("" ,"#gameCategory","#addModal");
+    getClasificacion("","#clasificacion","#addModal");
+    
+};
 
 /**
  * ===========================================================
@@ -276,9 +349,12 @@ btnAdd.addEventListener("click" , ()=>{
         showAlert("Agregado" , "Agregado correctamente" , "success");
         GetJuegos();
         hideModal('#addModal');
+        cleanCreateInputs();
     })
     .catch(error => {
         console.error(error);
          hideModal('#addModal');
     });
 });
+
+btnUpdate.addEventListener("click" , updateGame);

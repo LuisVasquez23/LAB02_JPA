@@ -162,7 +162,6 @@ public class CategoriaController extends HttpServlet {
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
                 uploadedDirectory = uploadedDirectory + "imagenes";
                 
-                
                 // Verificar si el directorio existe, si no, crearlo
                 File directory = new File(uploadedDirectory);
                 if (!directory.exists()) {

@@ -51,6 +51,10 @@ public class JuegoController extends HttpServlet {
                 createGame(request , response);
             }
             
+            if(action.equals("update")){
+                updateGame(request , response);
+            }
+            
            
         } catch (Exception e) {
             General.sendAsJson(response, "[{\"status\":\""+e.getMessage()+"\"}]");
@@ -95,8 +99,6 @@ public class JuegoController extends HttpServlet {
             int existencia = Integer.parseInt(request.getParameter("existencia"));
             int idCategoria = Integer.parseInt(request.getParameter("gameCategory"));
             String clasificacion = request.getParameter("clasificacion");
-            
-            // OBTENER LA CATEGORIA ASIGNADA
             Categoria categoria = _categoriaService.findCategoria(idCategoria);
             
             // CONFUGURACION DE LA IMAGEN 
@@ -143,6 +145,95 @@ public class JuegoController extends HttpServlet {
             
         } catch (Exception e) {
             General.sendAsJson(response, "[{\"status\":\""+e.getMessage()+"\"}]");
+        }
+    }
+    
+    private void updateGame(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        try {
+            String fileName = "";
+            String mainPath = getServletContext().getRealPath("/");
+            
+            // OBTENER VALORES
+            int idJuego = Integer.parseInt(request.getParameter("gameId"));
+            String nombre = request.getParameter("gameNameUpdate");
+            Float precio = Float.valueOf(request.getParameter("gamePriceUpdate"));
+            int existencia = Integer.parseInt(request.getParameter("existenciaUpdate"));
+            int idCategoria = Integer.parseInt(request.getParameter("gameCategoryUpdate"));
+            String clasificacion = request.getParameter("clasificacionUpdate");
+            
+            Categoria categoria = _categoriaService.findCategoria(idCategoria);
+            
+            // CONFUGURACION DE LA IMAGEN 
+            Part filePart = request.getPart("gamePictureUpdate");
+            InputStream fileContent = filePart.getInputStream();
+            
+            // Obtener el nombre original del archivo
+            String originalFileName = filePart.getSubmittedFileName();
+            
+            if(!originalFileName.equals("")){
+                // Obtener la extensión del archivo
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                String uploadedDirectory = mainPath + "imagenes";
+                
+                // Verificar si el directorio existe, si no, crearlo
+                File directory = new File(uploadedDirectory);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+        
+                fileName = nombre.replace(" ", "_") + fileExtension;
+                String uploadedFilePath = uploadedDirectory + File.separator + fileName;
+                File uploadedFile = new File(uploadedFilePath);
+
+                // Si el archivo ya existe, eliminarlo
+                if (uploadedFile.exists()) {
+                    uploadedFile.delete();
+                }
+
+                // Guardar la nueva imagen en el servidor
+                Files.copy(fileContent, Paths.get(uploadedFilePath));
+
+            }else{
+                fileName = request.getParameter("imgOld");
+                
+                String uploadedFilePath = mainPath + "imagenes\\"+fileName;
+                File uploadedFile = new File(uploadedFilePath);
+
+                // Verificar si el archivo existe
+                if (uploadedFile.exists()) {
+
+                    // Obtener la extensión del archivo
+                    String fileExtension = fileName.substring(fileName.lastIndexOf("."));
+
+                    // Nuevo nombre del archivo
+                    String nuevoNombreArchivo = mainPath +  "imagenes\\" + nombre.replace(" ", "_") + fileExtension ; 
+
+                    // Crear un nuevo objeto File con el nuevo nombre
+                    File nuevoArchivo = new File(nuevoNombreArchivo);
+
+                    uploadedFile.renameTo(nuevoArchivo);
+
+                    fileName = nombre.replace(" ", "_") + fileExtension;
+                }
+                
+            }
+
+         
+            // CREACION DEL OBJETO A INSERTAR 
+            Juego juegoEdit = _service.findJuego(idJuego);
+            juegoEdit.setNomJuego(nombre);
+            juegoEdit.setPrecio(precio);
+            juegoEdit.setExistencias(existencia);
+            juegoEdit.setIdCategoria(categoria);
+            juegoEdit.setClasificacion(clasificacion);
+            juegoEdit.setImagen(fileName);
+            
+            _service.edit(juegoEdit);
+                     
+            General.sendAsJson(response, General.ObjectToJson(juegoEdit));
+            
+        } catch (Exception e) {
+            General.sendAsJson(response, "[]");
         }
     }
     
