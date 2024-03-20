@@ -113,14 +113,14 @@ const deleteSelectedGames = () =>{
                 const success = results.every(data => data.length !== 0);
                 if (success) {
                     Swal.fire(
-                        '¡Eliminados!',
+                        'Eliminados!',
                         'Los registros han sido eliminados.',
                         'success'
                     );
                 } else {
                     Swal.fire({
-                        title: '¡Error!',
-                        text: '¡Algunos registros no pudieron ser eliminados!',
+                        title: 'Error!',
+                        text: 'Algunos registros no pudieron ser eliminados!',
                         icon: 'error',
                         confirmButtonText: 'Cerrar'
                     });
@@ -163,7 +163,7 @@ const deleteGame = (gameId)=>{
 
                 if(data.length !== 0){
                     Swal.fire(
-                       '¡Eliminado!',
+                       'Eliminado!',
                        'El registro ha sido eliminado.',
                        'success'
                      );
@@ -171,8 +171,8 @@ const deleteGame = (gameId)=>{
                 }
             
                 Swal.fire({
-                    title: '¡Error!',
-                    text: '¡No se puede eliminar el cliente!',
+                    title: 'Error!',
+                    text: 'No se puede eliminar el cliente!',
                     icon: 'error',
                     confirmButtonText: 'Cerrar'
                 });
@@ -268,7 +268,7 @@ const updateGame = ()=>{
         
         console.log(data);
         
-        showAlert("Actualizado" , "Actualizado correctamente" , "success");
+        showAlert("Actualizado correctamente" , "Actualizado" , "success");
         
         GetJuegos();
         

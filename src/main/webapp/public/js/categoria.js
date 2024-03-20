@@ -26,7 +26,7 @@ btnAdd.addEventListener("click" , ()=>{
              hideModal('#addModal');
         }
         
-        showAlert("Agregado" , "Agregado correctamente" , "success");
+        showAlert("Agregado correctamente" , "Agregado" , "success");
         
         GetCategorias();
         
@@ -53,17 +53,19 @@ btnUpdate.addEventListener("click" , ()=>{
     })
     .then(response => {
 
+        GetCategorias();
 
         if (!response.ok) {
             throw new Error("Error al enviar la solicitud.");
             hideModal('#updateModal');
         }
         
+        
         return response.json();
     })
     .then(data => {
         
-        showAlert("Actualizado" , "Actualizado correctamente" , "success");
+        showAlert("Actualizado correctamente" , "Actualizado " , "success");
         
         GetCategorias();
         
@@ -117,13 +119,13 @@ const RenderTableData = (categorias)=>{
 const DeleteCategory = (idCategory) => {
     
    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Una vez eliminado, no podrás recuperar este registro.",
+      title: "Estas seguro?",
+      text: "Una vez eliminado, no podra recuperar este registro.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminarlo!',
+      confirmButtonText: 'Si, eliminarlo!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
        if (result.isConfirmed) {
@@ -138,7 +140,7 @@ const DeleteCategory = (idCategory) => {
         
                 if(data.length != 0){
                  Swal.fire(
-                    '¡Eliminado!',
+                    'Eliminado!',
                     'El registro ha sido eliminado.',
                     'success'
                   );
@@ -146,8 +148,8 @@ const DeleteCategory = (idCategory) => {
                 }
             
                 Swal.fire({
-                    title: '¡Error!',
-                    text: '¡No se puede eliminar el registro!',
+                    title: 'Error!',
+                    text: 'No se puede eliminar el registro!',
                     icon: 'error',
                     confirmButtonText: 'Cerrar'
                 });
@@ -178,13 +180,13 @@ const DeleteCategories = () => {
     }
     
     Swal.fire({
-        title: "¿Estás seguro?",
-        text: "Una vez eliminados, no podrás recuperar estos registros.",
+        title: "Estas seguro?",
+        text: "Una vez eliminados, no podras recuperar estos registros.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, eliminarlos!',
+        confirmButtonText: 'Sa, eliminarlos!',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
@@ -200,14 +202,14 @@ const DeleteCategories = () => {
                 const success = results.every(data => data.length !== 0);
                 if (success) {
                     Swal.fire(
-                        '¡Eliminados!',
+                        'Eliminados!',
                         'Los registros han sido eliminados.',
                         'success'
                     );
                 } else {
                     Swal.fire({
-                        title: '¡Error!',
-                        text: '¡Algunos registros no pudieron ser eliminados!',
+                        title: 'Error!',
+                        text: 'Algunos registros no pudieron ser eliminados!',
                         icon: 'error',
                         confirmButtonText: 'Cerrar'
                     });
