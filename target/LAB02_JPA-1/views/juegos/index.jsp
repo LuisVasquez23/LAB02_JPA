@@ -47,11 +47,11 @@
           </div>
           <div class="modal-body">
               
-              <form action="/LAB02_JPA/Juego" method="POST" enctype="multipart/form-data" class="row" id="juegoAddForm">
+              <form action="/LAB02_JPA/Juego" method="POST" enctype="multipart/form-data" class="row" id="juegoForm">
                     
                     <!-- ACTION -->
                     <div class="col-md-12 mb-2">
-                          <input type="hidden" name="action" id="actionInsert" value="create" class="form-control" >
+                        <input type="hidden" name="action" id="action" value="create" class="form-control" >
                     </div>
 
                     <!-- NOMBRE INPUT -->

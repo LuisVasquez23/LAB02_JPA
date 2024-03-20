@@ -44,7 +44,7 @@ const RenderTableData = (juegos)=>{
             juego.nomJuego,
             `$ ${juego.precio}`,
             juego.existencias,
-            juego.imagen,
+            `<img src="${BASE_URL}/imagenes/${juego.imagen}" title="${juego.nomJuego}" style="width:30px" />`,
             juego.clasificacion,
             juego.idCategoria.categoria,
              `
@@ -191,6 +191,7 @@ const getClasificacion = (value , parentModal = "#addModal") =>{
     
 };
 
+
 /**
  * ===========================================================
  *  EVENTS HANDLING 
@@ -211,5 +212,29 @@ deleteSelectedBtn.addEventListener("click" , ()=>{
 });
 
 btnAdd.addEventListener("click" , ()=>{
-   console.log("dio click"); 
+    let formData = new FormData(document.getElementById("juegoForm"));
+    
+    fetch(GAME_URL, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        
+        if (!response.ok) {
+            throw new Error("Error al enviar la solicitud.");
+             hideModal('#addModal');
+        }
+        
+        return response.json();
+    })
+    .then((data)=>{
+        console.log(data);
+        showAlert("Agregado" , "Agregado correctamente" , "success");
+        GetJuegos();
+        hideModal('#addModal');
+    })
+    .catch(error => {
+        console.error(error);
+         hideModal('#addModal');
+    });
 });
