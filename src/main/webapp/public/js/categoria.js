@@ -160,7 +160,7 @@ const DeleteCategory = (idCategory) => {
             })
             .catch(error => {
                 console.error('Error al realizar la solicitud:', error); // Manejar errores
-            });;
+            });
        }
     });
     
@@ -231,10 +231,6 @@ const GetSelectedCheckboxes = () => {
         selectedCheckboxes.push($(this).val());
     });
     return selectedCheckboxes;
-}
-
-function hideModal(idModal) {
-  $(idModal).modal('hide');
 }
 
 const cleanInputs = () => {

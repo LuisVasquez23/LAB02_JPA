@@ -8,6 +8,8 @@ import helpers.General;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Juego;
 import service.JuegoService;
+import service.exceptions.NonexistentEntityException;
 
 
 @WebServlet(name = "JuegoController", urlPatterns = {"/Juego"})
@@ -23,8 +26,6 @@ public class JuegoController extends HttpServlet {
     
     private final JuegoService _service = new JuegoService();
 
-
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,11 +33,7 @@ public class JuegoController extends HttpServlet {
         List<Juego> juegos = _service.findJuegoEntities();
         
         General.sendAsJson(response, General.ObjectToJson(juegos));
-        return;
-        
-   
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -44,5 +41,23 @@ public class JuegoController extends HttpServlet {
      
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            
+            // Get the game id 
+            int gameId = Integer.parseInt(request.getParameter("gameId"));
+            
+            // Delete game
+            _service.destroy(gameId);
+            
+            General.sendAsJson(response, "[{\"status\":\"Done!\"}]");
+            
+        } catch (IOException | NonexistentEntityException e) {
+            General.sendAsJson(response, "[{\"status\":\""+e.getMessage()+"\"}]");
+        }
+    }
+    
+    
 
 }

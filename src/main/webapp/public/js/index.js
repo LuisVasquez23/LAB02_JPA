@@ -19,3 +19,10 @@ function showAlert(message,title, type) {
     });
 }
 
+function hideModal(idModal) {
+  $(idModal).modal('hide');
+}
+
+function showModal(idModal) {
+  $(idModal).modal('show');
+}
