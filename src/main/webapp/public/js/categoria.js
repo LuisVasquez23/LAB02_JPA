@@ -63,8 +63,6 @@ btnUpdate.addEventListener("click" , ()=>{
     })
     .then(data => {
         
-        console.log(data);
-
         showAlert("Actualizado" , "Actualizado correctamente" , "success");
         
         GetCategorias();
@@ -73,7 +71,7 @@ btnUpdate.addEventListener("click" , ()=>{
         
         cleanInputs();
         
-    
+
     })
     .catch(error => {
         console.error(error);
@@ -156,7 +154,6 @@ const DeleteCategory = (idCategory) => {
             })
             .then(function(){
                 GetCategorias();
-       
             })
             .catch(error => {
                 console.error('Error al realizar la solicitud:', error); // Manejar errores

@@ -1,19 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controllers;
 
 import helpers.General;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -71,6 +64,17 @@ public class JuegoController extends HttpServlet {
             // Get the game id 
             int gameId = Integer.parseInt(request.getParameter("gameId"));
             
+            // Obtener el juego para eliminar la imagen
+            Juego juego = _service.findJuego(gameId);
+            String uploadedDirectory = getServletContext().getRealPath("/"); // Obtiene la ruta del contexto del proyecto
+            uploadedDirectory = uploadedDirectory + "imagenes\\";
+            String uploadedFilePath = uploadedDirectory + juego.getImagen();
+            File uploadedFile = new File(uploadedFilePath);
+
+            // Si el archivo ya existe, eliminarlo
+            if (uploadedFile.exists()) {
+                uploadedFile.delete();
+            }
             // Delete game
             _service.destroy(gameId);
             
@@ -116,16 +120,8 @@ public class JuegoController extends HttpServlet {
         
             String fileName = nombre.replace(" ", "_") + fileExtension;
             String uploadedFilePath = uploadedDirectory + File.separator + fileName;
-            File uploadedFile = new File(uploadedFilePath);
-
-            // Si el archivo ya existe, eliminarlo
-            if (uploadedFile.exists()) {
-                uploadedFile.delete();
-            }
-
-            // Guardar la nueva imagen en el servidor
-            Files.copy(fileContent, Paths.get(uploadedFilePath));
             
+         
             // CREACION DEL OBJETO A INSERTAR 
             Juego juegoAdd = new Juego();
             juegoAdd.setNomJuego(nombre);
@@ -137,6 +133,12 @@ public class JuegoController extends HttpServlet {
             
             _service.create(juegoAdd);
             
+            deleteImg(uploadedFilePath);
+            
+            // Guardar la nueva imagen en el servidor
+            Files.copy(fileContent, Paths.get(uploadedFilePath));
+           
+            
             General.sendAsJson(response, General.ObjectToJson(juegoAdd));
             
         } catch (Exception e) {
@@ -144,5 +146,12 @@ public class JuegoController extends HttpServlet {
         }
     }
     
+    private void deleteImg(String uploadedFilePath){
+        File uploadedFile = new File(uploadedFilePath);
 
+        // Si el archivo ya existe, eliminarlo
+        if (uploadedFile.exists()) {
+            uploadedFile.delete();
+        }
+    }
 }

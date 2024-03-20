@@ -42,103 +42,20 @@ public class CategoriaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Declaracion de variables
-         String uploadedDirectory = getServletContext().getRealPath("/"); // Obtiene la ruta del contexto del proyecto
-
         try {
-            // Obtener los datos del formulario
-            String categoria = request.getParameter("categoria");
+            
             String action = request.getParameter("action");
             
-            // Categoria agregar
-            Categoria categoriaAdd = new Categoria();
-             
-            Part filePart = request.getPart("pic_categoria");
-            InputStream fileContent = filePart.getInputStream();
-        
-            // Obtener el nombre original del archivo
-            String originalFileName = filePart.getSubmittedFileName();
-
-            if(!originalFileName.equals("")){
-
-                // Obtener la extensión del archivo
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-
-        
-                uploadedDirectory = uploadedDirectory + "imagenes";
-
-                // Verificar si el directorio existe, si no, crearlo
-                File directory = new File(uploadedDirectory);
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
-        
-                String fileName = categoria.replace(" ", "_") + fileExtension;
-                String uploadedFilePath = uploadedDirectory + File.separator + fileName;
-                File uploadedFile = new File(uploadedFilePath);
-
-                // Si el archivo ya existe, eliminarlo
-                if (uploadedFile.exists()) {
-                    uploadedFile.delete();
-                }
-
-                // Guardar la nueva imagen en el servidor
-                Files.copy(fileContent, Paths.get(uploadedFilePath));
-                categoriaAdd.setImagenCat(fileName);
-            }else{
-                String picCategoria = request.getParameter("pic_categoria_old");
-                categoriaAdd.setImagenCat(picCategoria);
-                
-                String uploadedFilePath = uploadedDirectory + "imagenes\\"+categoriaAdd.getImagenCat();
-                File uploadedFile = new File(uploadedFilePath);
-                
-                // Verificar si el archivo existe
-                if (uploadedFile.exists()) {
-                    
-                    // Obtener la extensión del archivo
-                    String fileExtension = picCategoria.substring(picCategoria.lastIndexOf("."));
-                    
-                    // Nuevo nombre del archivo
-                    String nuevoNombreArchivo = uploadedDirectory +  "imagenes\\" + categoria.replace(" ", "_") + fileExtension ; 
-
-                    // Crear un nuevo objeto File con el nuevo nombre
-                    File nuevoArchivo = new File(nuevoNombreArchivo);
-                    
-                    uploadedFile.renameTo(nuevoArchivo);
-                    
-                    categoriaAdd.setImagenCat(categoria.replace(" ", "_") + fileExtension);
-                }
+            if(action.equals("create")){
+                createCategory(request, response);
             }
             
-            // Agregar en la db 
-           
-            categoriaAdd.setCategoria(categoria);
-            
-            
-            if (action.equals("create")) {
-                _service.create(categoriaAdd);
+            if(action.equals("update")){
+                updateCategory(request, response);
             }
-            
-            if (action.equals("update")) {
-                
-                int id = Integer.parseInt(request.getParameter("idCategoriaUpdate"));
-                
-                Categoria categoriaEdit = _service.findCategoria(id);
-                
-                categoriaEdit.setCategoria(categoria);
-                categoriaEdit.setImagenCat(categoriaAdd.getImagenCat());
-                
-                _service.edit(categoriaEdit);
-                General.sendAsJson(response, General.ObjectToJson(categoriaEdit));
-                return;
-            }
-            
-            General.sendAsJson(response, General.ObjectToJson(categoriaAdd));
-            return;
-
+          
         } catch (Exception e) {
             General.sendAsJson(response, "[{\"status\":\""+e.getMessage()+"\"}]");
-            return;
         }
         
         
@@ -172,18 +89,137 @@ public class CategoriaController extends HttpServlet {
         }
     }
 
-  
-    private String extractFormData(Part part) throws IOException {
-        try (InputStream inputStream = part.getInputStream()) {
-          StringBuilder sb = new StringBuilder();
-          String str;
-          BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-          while ((str = reader.readLine()) != null) {
-            sb.append(str);
-          }
-          return sb.toString();
+    private void createCategory(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        try {
+            
+            String uploadedDirectory = getServletContext().getRealPath("/");
+            
+            // Obtener los datos del formulario
+            String categoria = request.getParameter("categoria");
+            
+            
+             // Categoria agregar
+            Categoria categoriaAdd = new Categoria();
+             
+            Part filePart = request.getPart("pic_categoria");
+            InputStream fileContent = filePart.getInputStream();
+        
+            // Obtener el nombre original del archivo
+            String originalFileName = filePart.getSubmittedFileName();
+            
+            // Obtener la extensión del archivo
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            uploadedDirectory = uploadedDirectory + "imagenes";
+
+            // Verificar si el directorio existe, si no, crearlo
+            File directory = new File(uploadedDirectory);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+        
+            String fileName = categoria.replace(" ", "_") + fileExtension;
+            String uploadedFilePath = uploadedDirectory + File.separator + fileName;
+            File uploadedFile = new File(uploadedFilePath);
+
+            // Si el archivo ya existe, eliminarlo
+            if (uploadedFile.exists()) {
+                uploadedFile.delete();
+            }
+
+            // Guardar la nueva imagen en el servidor
+            Files.copy(fileContent, Paths.get(uploadedFilePath));
+            categoriaAdd.setImagenCat(fileName);
+            
+            categoriaAdd.setCategoria(categoria);
+            
+            _service.create(categoriaAdd);
+            
+            General.sendAsJson(response, General.ObjectToJson(categoriaAdd));
+            
+        } catch (Exception e) {
+            General.sendAsJson(response, "[]");
         }
     }
+    
+    private void updateCategory(HttpServletRequest request, HttpServletResponse response)  throws IOException{
+        try {
+            
+            String uploadedDirectory = getServletContext().getRealPath("/");
+            
+            // Obtener los datos del formulario
+            String categoria = request.getParameter("categoria");
+            
+            // Categoria agregar
+            Categoria categoriaAdd = new Categoria();
+            Part filePart = request.getPart("pic_categoria");
+            InputStream fileContent = filePart.getInputStream();
+        
+            // Obtener el nombre original del archivo
+            String originalFileName = filePart.getSubmittedFileName();
+            
+            if(!originalFileName.equals("")){
+                 // Obtener la extensión del archivo
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                uploadedDirectory = uploadedDirectory + "imagenes";
+                
+                
+                // Verificar si el directorio existe, si no, crearlo
+                File directory = new File(uploadedDirectory);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+        
+                String fileName = categoria.replace(" ", "_") + fileExtension;
+                String uploadedFilePath = uploadedDirectory + File.separator + fileName;
+                File uploadedFile = new File(uploadedFilePath);
 
+                // Si el archivo ya existe, eliminarlo
+                if (uploadedFile.exists()) {
+                    uploadedFile.delete();
+                }
 
+                // Guardar la nueva imagen en el servidor
+                Files.copy(fileContent, Paths.get(uploadedFilePath));
+                categoriaAdd.setImagenCat(fileName);
+            }else{
+                String picCategoria = request.getParameter("pic_categoria_old");
+                categoriaAdd.setImagenCat(picCategoria);
+
+                String uploadedFilePath = uploadedDirectory + "imagenes\\"+categoriaAdd.getImagenCat();
+                File uploadedFile = new File(uploadedFilePath);
+
+                // Verificar si el archivo existe
+                if (uploadedFile.exists()) {
+
+                    // Obtener la extensión del archivo
+                    String fileExtension = picCategoria.substring(picCategoria.lastIndexOf("."));
+
+                    // Nuevo nombre del archivo
+                    String nuevoNombreArchivo = uploadedDirectory +  "imagenes\\" + categoria.replace(" ", "_") + fileExtension ; 
+
+                    // Crear un nuevo objeto File con el nuevo nombre
+                    File nuevoArchivo = new File(nuevoNombreArchivo);
+
+                    uploadedFile.renameTo(nuevoArchivo);
+
+                    categoriaAdd.setImagenCat(categoria.replace(" ", "_") + fileExtension);
+                }
+            }
+            
+            int id = Integer.parseInt(request.getParameter("idCategoriaUpdate"));
+                
+            Categoria categoriaEdit = _service.findCategoria(id);
+
+            categoriaEdit.setCategoria(categoria);
+            categoriaEdit.setImagenCat(categoriaAdd.getImagenCat());
+
+            _service.edit(categoriaEdit);
+            
+            General.sendAsJson(response, General.ObjectToJson(categoriaEdit));
+            
+            
+        } catch (Exception e) {
+            General.sendAsJson(response, "[]");
+        }
+    }
 }
