@@ -52,7 +52,7 @@
                   <!-- NOMBRE CATEGORIA -->
                   <div class="col-md-12 mb-2">
                       <label for="categoria">Categoria: </label>
-                      <input type="text" name="categoria" class="form-control" placeholder="categoria" required="true">
+                      <input type="text" name="categoria" id="categoria" class="form-control" placeholder="categoria" required="true">
                   </div>
                   
                   <!-- FOTO CATEGORIA -->

@@ -309,6 +309,42 @@ const cleanCreateInputs = () => {
     
 };
 
+const validate = ()=>{
+    
+    if($("#gameName").val() === ""){
+        showAlert("Campo nombre vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    if($("#gameCategory").val() === ""){
+        showAlert("Campo categoria vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    if($("#existencia").val() === ""){
+        showAlert("Campo existencia vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    if($("#gamePrice").val() === ""){
+        showAlert("Campo precio vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    if($("#clasificacion").val() === ""){
+        showAlert("Campo clasificacion vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    if($("#gamePicture").val() === ""){
+        showAlert("Imagen requerida" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    return false;
+    
+}
+
 /**
  * ===========================================================
  *  EVENTS HANDLING 
@@ -329,6 +365,11 @@ deleteSelectedBtn.addEventListener("click" , ()=>{
 });
 
 btnAdd.addEventListener("click" , ()=>{
+    
+    if(validate()){
+        return;
+    }
+    
     let formData = new FormData(document.getElementById("juegoForm"));
     
     fetch(GAME_URL, {
@@ -345,7 +386,8 @@ btnAdd.addEventListener("click" , ()=>{
         return response.json();
     })
     .then((data)=>{
-        console.log(data);
+
+
         showAlert("Agregado" , "Agregado correctamente" , "success");
         GetJuegos();
         hideModal('#addModal');

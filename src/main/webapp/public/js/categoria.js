@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded" , ()=>{
 
 btnAdd.addEventListener("click" , ()=>{
     
+    if(validate()){
+        return;
+    }
+    
     let formData = new FormData(document.getElementById("categoriaForm"));
     
     // Enviar los datos del formulario al servidor usando Fetch
@@ -43,6 +47,10 @@ btnAdd.addEventListener("click" , ()=>{
 });
 
 btnUpdate.addEventListener("click" , ()=>{
+   
+   if(validateUpdate()){
+        return;
+    }
    
     let formData = new FormData(document.getElementById("categoriaFormUpdate"));
     
@@ -250,3 +258,28 @@ const UpdateCategory = (idCategory , nameCategory , imagenName) =>{
     
     $("#updateModal").modal('show');
 };
+
+const validate = ()=>{
+    
+    if($("#categoria").val() === ""){
+        showAlert("Campo categoria vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+
+    
+    return false;
+    
+}
+
+const validateUpdate = ()=>{
+    
+    if($("#categoriaUpdate").val() === ""){
+        showAlert("Campo categoria vacio" , "Cuidado" , "warning");
+        return true;
+    }
+    
+    
+    return false;
+    
+}
